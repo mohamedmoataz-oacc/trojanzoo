@@ -55,7 +55,9 @@ class CUB200(ImageFolder):
         extract_archive(from_path=file_path, to_path=self.folder_path)
 
         # Remove useless files
-        for fpath in glob.glob(os.path.join(self.folder_path, 'train/*/._*.jpg')):
+        files_to_delete = glob.glob(os.path.join(os.getcwd(), self.folder_path, 'train/*/._*.jpg'))
+        print("To delete head:", files_to_delete[:5])
+        for fpath in files_to_delete:
             os.remove(fpath)
 
     def initialize_folder(self, **kwargs):
