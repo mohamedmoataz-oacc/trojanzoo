@@ -60,7 +60,6 @@ class CUB200(ImageFolder):
 
         # Remove useless files
         files_to_delete = glob.glob(os.path.join(os.getcwd(), self.folder_path, 'train/*/._*.jpg'))
-        print("To delete head:", files_to_delete[:5])
         for fpath in files_to_delete:
             os.remove(fpath)
 
