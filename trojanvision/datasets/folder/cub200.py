@@ -5,6 +5,7 @@ from trojanzoo.utils.output import ansi, prints
 
 from torchvision.datasets.utils import download_file_from_google_drive, extract_archive, check_integrity
 import os
+import glob
 import shutil
 import pandas as pd
 
@@ -52,6 +53,10 @@ class CUB200(ImageFolder):
         else:
             prints('{yellow}File Already Exists{reset}: '.format(**ansi), file_path, indent=10)
         extract_archive(from_path=file_path, to_path=self.folder_path)
+
+        # Remove useless files
+        for fpath in glob.glob(os.path.join(self.folder_path, 'train/*/._*.jpg')):
+            os.remove(fpath)
 
     def initialize_folder(self, **kwargs):
         super().initialize_folder(**kwargs)
