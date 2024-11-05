@@ -54,15 +54,15 @@ class CUB200(ImageFolder):
             prints('{yellow}File Already Exists{reset}: '.format(**ansi), file_path, indent=10)
         extract_archive(from_path=file_path, to_path=self.folder_path)
 
+    def initialize_folder(self, **kwargs):
+        super().initialize_folder(**kwargs)
+        self.split()
+
         # Remove useless files
         files_to_delete = glob.glob(os.path.join(os.getcwd(), self.folder_path, 'train/*/._*.jpg'))
         print("To delete head:", files_to_delete[:5])
         for fpath in files_to_delete:
             os.remove(fpath)
-
-    def initialize_folder(self, **kwargs):
-        super().initialize_folder(**kwargs)
-        self.split()
 
     def split(self):
         # Remove useless files
