@@ -58,10 +58,15 @@ class CUB200(ImageFolder):
         super().initialize_folder(**kwargs)
         self.split()
 
-        # Remove useless files
-        files_to_delete = glob.glob(os.path.join(os.getcwd(), self.folder_path, 'train/*/._*.jpg'))
-        for fpath in files_to_delete:
-            os.remove(fpath)
+        # Useless files
+        # files_to_delete = glob.glob(os.path.join(os.getcwd(), self.folder_path, 'train/*/._*.jpg'))
+        # for fpath in files_to_delete:
+        #     os.remove(fpath)
+
+        # Downsample the dataset
+        folders_to_delete = glob.glob(os.path.join(os.getcwd(), self.folder_path, 'train/*'))[30:]
+        for fpath in folders_to_delete:
+            shutil.rmtree(fpath)
 
     def split(self):
         # Remove useless files
