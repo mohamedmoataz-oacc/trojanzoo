@@ -31,7 +31,7 @@ class CUB200(ImageFolder):
         http://www.vision.caltech.edu/visipedia/papers/WelinderEtal10_CUB-200.pdf
     """
     name = 'cub200'
-    num_classes = 200
+    num_classes = 30
     valid_set = False
     # http://www.vision.caltech.edu/visipedia-data/CUB-200/images.tgz
     url = {'train': '1GDr1OkoXdhaXWGA8S3MAq3a522Tak-nx'}
