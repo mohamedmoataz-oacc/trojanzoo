@@ -64,9 +64,16 @@ class CUB200(ImageFolder):
         #     os.remove(fpath)
 
         # Downsample the dataset
-        folders_to_delete = glob.glob(os.path.join(os.getcwd(), self.folder_path, 'train/*'))[30:]
+        folders_to_delete = glob.glob(os.path.join(os.getcwd(), self.folder_path, 'train/*'))
+        folders_to_delete.extend(glob.glob(os.path.join(os.getcwd(), self.folder_path, 'valid/*')))
         for fpath in folders_to_delete:
-            shutil.rmtree(fpath)
+            num = int(os.path.basename(fpath).split('.')[0])
+            if num > 30:
+                shutil.rmtree(fpath)
+            else:
+                files_to_delete = glob.glob(os.path.join(fpath, '._*.jpg'))
+                for path in files_to_delete:
+                    os.remove(path)
 
     def split(self):
         # Remove useless files
